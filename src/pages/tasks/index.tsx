@@ -1,7 +1,8 @@
 import { Circle, CircleCheck, Clock, Plus } from 'lucide-react'
 import React from 'react'
-import TaskItem from './_components/task-item'
 import { Button } from '@/components/ui/button'
+import TaskEmpty from './_components/task-empty'
+import TaskCreateButton from './_components/task-create-button'
 
 const Tasks: React.FC = () => {
     return (
@@ -14,17 +15,10 @@ const Tasks: React.FC = () => {
                             <Circle size={20} />
                             To Do
                         </div>
-                        <Button
-                            variant="outline"
-                            size="sm"
-                        >
-                            <Plus size={16} />
-                            New
-                        </Button>
+                        <TaskCreateButton taskType='TODO' />
                     </div>
                     <div className='flex flex-col gap-2'>
-                        <TaskItem />
-                        <TaskItem />
+                        <TaskEmpty />
                     </div>
                 </div>
 
@@ -38,14 +32,14 @@ const Tasks: React.FC = () => {
                         <Button
                             variant="outline"
                             size="sm"
+                            className='cursor-pointer'
                         >
                             <Plus size={16} />
                             New
                         </Button>
                     </div>
                     <div className='flex flex-col gap-2'>
-                        <TaskItem />
-                        <TaskItem />
+                        <TaskEmpty />
                     </div>
                 </div>
 
@@ -59,14 +53,14 @@ const Tasks: React.FC = () => {
                         <Button
                             variant="outline"
                             size="sm"
+                            className='cursor-pointer'
                         >
                             <Plus size={16} />
                             New
                         </Button>
                     </div>
                     <div className='flex flex-col gap-2'>
-                        <TaskItem />
-                        <TaskItem />
+                        <TaskEmpty />
                     </div>
                 </div>
             </div>
