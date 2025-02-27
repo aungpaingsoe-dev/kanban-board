@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { CircleCheck, Circle, Clock, Plus } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -9,8 +7,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Circle, CircleCheck, Clock, Edit3 } from "lucide-react";
+import { Controller, useForm } from "react-hook-form";
+import { Task } from "@/types";
 import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -20,32 +22,45 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useForm, Controller } from "react-hook-form";
-import { Task } from "@/types";
 import { useTaskStore } from "@/stores";
 
-interface TaskCreateButtonProp {
-  taskType: "TODO" | "INPROGRESS" | "DONE";
-}
-
-const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
-  const { tasks, addTask } = useTaskStore();
+const TaskEditButton: React.FC<{ task: Task }> = ({ task }) => {
   const [open, setOpen] = useState(false);
+  const { updateTask } = useTaskStore();
 
   const {
     control,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<Task>();
+  } = useForm<Task>({
+    defaultValues: {
+      title: task.title,
+      description: task.description ?? "",
+      priority: task.priority,
+      due_date: task.due_date,
+      type: task.type,
+    },
+  });
+
+  // Reset the form values when the task prop changes
+  useEffect(() => {
+    reset({
+      title: task.title,
+      description: task.description ?? "",
+      priority: task.priority,
+      due_date: task.due_date,
+      type: task.type,
+    });
+  }, [task, reset]);
 
   const onSubmit = (data: Task) => {
-    addTask({
-      id: tasks.length + 1,
+    updateTask(task.id, {
+      id: task.id,
       title: data.title,
       description: data.description,
       due_date: data.due_date,
-      type: taskType,
+      type: data.type,
       priority: data.priority,
     });
     reset();
@@ -53,27 +68,27 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
   };
 
   const dialogTitle = () => {
-    if (taskType === "TODO")
+    if (task.type === "TODO")
       return (
         <div className="flex items-center gap-1.5">
           <Circle />
-          Create New To Do Task
+          Edit To Do Task
         </div>
       );
 
-    if (taskType === "INPROGRESS")
+    if (task.type === "INPROGRESS")
       return (
         <div className="flex items-center gap-1.5">
           <Clock className="text-yellow-500" />
-          Create New In Progress Task
+          Edit In Progress Task
         </div>
       );
 
-    if (taskType === "DONE")
+    if (task.type === "DONE")
       return (
         <div className="flex items-center gap-1.5">
           <CircleCheck className="text-green-500" />
-          Create New Done Task
+          Edit Done Task
         </div>
       );
   };
@@ -81,20 +96,17 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <div>
-          <Button variant="outline" size="sm" className="cursor-pointer">
-            <Plus size={16} className="mr-2" />
-            New
-          </Button>
-        </div>
+        <Button variant="ghost" size="icon" className="cursor-pointer">
+          <Edit3 />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className=" capitalize ">{dialogTitle()}</DialogTitle>
+          <DialogTitle className="capitalize">{dialogTitle()}</DialogTitle>
         </DialogHeader>
         <form
           className="flex flex-col gap-4"
-          id="task_create_form"
+          id="task_edit_form"
           onSubmit={handleSubmit(onSubmit)}
         >
           <div>
@@ -110,6 +122,7 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
                   id="title"
                   placeholder="Enter task title"
                   {...field}
+                  value={field.value}
                   className="mt-2"
                 />
               )}
@@ -128,6 +141,7 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
               render={({ field }) => (
                 <Textarea
                   {...field}
+                  value={field.value}
                   id="description"
                   placeholder="Enter task description (optional)"
                   className="mt-2"
@@ -143,7 +157,6 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
               <Controller
                 name="priority"
                 control={control}
-                defaultValue="LOW"
                 rules={{ required: "Priority is required" }}
                 render={({ field }) => (
                   <Select onValueChange={field.onChange} value={field.value}>
@@ -177,6 +190,7 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
                 render={({ field }) => (
                   <Input
                     {...field}
+                    value={field.value}
                     id="due_date"
                     type="date"
                     className="mt-2"
@@ -193,8 +207,16 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
         </form>
         <DialogFooter>
           <Button
+            type="button"
+            variant="outline"
+            className="cursor-pointer"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+          <Button
             type="submit"
-            form="task_create_form"
+            form="task_edit_form"
             className="cursor-pointer"
           >
             Save Changes
@@ -205,4 +227,4 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
   );
 };
 
-export default TaskCreateButton;
+export default TaskEditButton;

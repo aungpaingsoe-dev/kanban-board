@@ -11,7 +11,7 @@ const SideBar: React.FC = () => {
                 Tasks.
             </div>
             <div className='mt-7'>
-                <div className=' opacity-70 px-2'>Menu</div>
+                <div className=' opacity-70 px-2 text-sm'>General</div>
                 <ul className='flex flex-col gap-1 mt-3'>
                     <Link to="/">
                         <li className={`menu-item ${location.pathname === '/' && 'bg-slate-100 opacity-100'}`}>
