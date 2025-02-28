@@ -193,6 +193,14 @@ const TaskCreateButton: React.FC<TaskCreateButtonProp> = ({ taskType }) => {
         </form>
         <DialogFooter>
           <Button
+            type="button"
+            variant="outline"
+            className="cursor-pointer"
+            onClick={() => setOpen(false)}
+          >
+            Cancel
+          </Button>
+          <Button
             type="submit"
             form="task_create_form"
             className="cursor-pointer"
