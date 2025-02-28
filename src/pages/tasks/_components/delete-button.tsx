@@ -11,14 +11,13 @@ import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { useTaskStore } from "@/stores";
-import { Task } from "@/types";
 
-const TaskDeleteButton: React.FC<{ task: Task }> = ({ task }) => {
+const DeleteButton: React.FC<{ id: number }> = ({ id }) => {
   const [open, setOpen] = useState(false);
   const { removeTask } = useTaskStore();
 
   const handleDeleteTask = () => {
-    removeTask(task.id);
+    removeTask(id);
     setOpen(false);
   };
 
@@ -66,4 +65,4 @@ const TaskDeleteButton: React.FC<{ task: Task }> = ({ task }) => {
   );
 };
 
-export default TaskDeleteButton;
+export default DeleteButton;

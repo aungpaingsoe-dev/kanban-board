@@ -1,8 +1,8 @@
 export interface Task {
   id: number;
-  title: string;
+  text: string;
   description?: string;
-  priority: "LOW" | "MEDIUM" | "HIGH";
+  priority: "Low" | "Medium" | "High";
   due_date: string;
-  type: "TODO" | "INPROGRESS" | "DONE";
+  status: "Todo" | "In Progress" | "Done";
 }

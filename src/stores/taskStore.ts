@@ -5,7 +5,7 @@ import { devtools } from "zustand/middleware";
 interface TaskStore {
   tasks: Task[];
   addTask: (createTaskInput: Task) => void;
-  updateTask: (id: number, editTaskInput: Task) => void;
+  updateTask: (taskId: number, editTaskInput: any) => void;
   removeTask: (taskId: number) => void;
 }
 
