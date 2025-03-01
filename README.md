@@ -1,7 +1,5 @@
 
-# Project Title
-
-Kanban Board : Task Management System 
+# Kanban Board : Task Management System 
 
 A modern task management system built with shadcn/ui, TypeScript, Tailwind CSS, and Zustand. This project includes features like drag-and-drop task organization, a dashboard overview, dark/light mode, and mobile responsive.
 ## Demo Link
