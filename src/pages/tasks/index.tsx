@@ -10,6 +10,7 @@ import DeleteButton from "./_components/delete-button";
 import EditButton from "./_components/edit-button";
 import { Task as ITask } from "@/types";
 import { useLocation } from "react-router";
+import { Separator } from "@/components/ui/separator";
 
 // Draggable Task Component
 const TaskItem: React.FC<ITask> = ({
@@ -33,7 +34,9 @@ const TaskItem: React.FC<ITask> = ({
   return (
     <div
       ref={drag}
-      className="border p-3 rounded-lg shadow-sm cursor-grab bg-white transition-all flex flex-col gap-3"
+      className={`border p-3 rounded-lg shadow-sm cursor-grab bg-white transition-all flex flex-col gap-3 ${
+        isDragging && "hidden"
+      }`}
     >
       <div className="font-medium flex justify-between items-center">
         <div className=" text ">
@@ -79,7 +82,6 @@ const Column = ({ status, tasks, onDrop }: any) => {
   });
 
   const isActive = canDrop && isOver;
-  console.log(isActive);
 
   return (
     <div ref={drop}>
@@ -99,6 +101,7 @@ const Column = ({ status, tasks, onDrop }: any) => {
         </div>
         <CreateButton status={status} />
       </div>
+      <Separator className={`mb-3 ${isActive && "bg-slate-700"} `} />
       <div className="flex flex-col gap-2 h-[calc(100vh-200px)]">
         {tasks.filter((task: any) => task.status === status).length === 0 ? (
           <Empty />
