@@ -12,7 +12,6 @@ import { Task as ITask } from "@/types";
 import { useLocation } from "react-router";
 import { Separator } from "@/components/ui/separator";
 
-// Draggable Task Component
 const TaskItem: React.FC<ITask> = ({
   id,
   text,
@@ -28,6 +27,13 @@ const TaskItem: React.FC<ITask> = ({
       isDragging: monitor.isDragging(),
     }),
   });
+
+  const isOverDue = () => {
+    const dueDate = new Date(due_date);
+    const today = new Date();
+    const isOverdue = dueDate > today;
+    return isOverdue;
+  };
 
   return (
     <div
@@ -53,7 +59,11 @@ const TaskItem: React.FC<ITask> = ({
         </div>
       </div>
       <div className="flex justify-between items-center">
-        <div className="flex items-center gap-1 text-xs">
+        <div
+          className={`flex items-center gap-1 text-xs ${
+            isOverDue() && "text-red-500"
+          }`}
+        >
           <Calendar size={16} />
           Due : {due_date}
         </div>
