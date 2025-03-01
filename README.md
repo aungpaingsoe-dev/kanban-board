@@ -80,16 +80,35 @@ Start the server
   npm run dev
 ```
 
-##Usage Guide
+## Usage Guid
 
-1️⃣ Adding a Task
-* Click on the "Add Task" button
-* Enter the task details (title, description, priority, etc.)
-* Click Save
-2️⃣ Managing Tasks
-* Drag and drop tasks between different columns (To Do, In Progress, Done)
-* Click on a task to edit or delete it
-3️⃣ Switching Dark/Light Mode
-* Toggle the theme switch button in the top-right corner
-4️⃣ Mobile View
-* The app is **fully responsive
+Create New Tasks
+
+- Go to tasks page
+- Click new button
+- Enter task details ( eg: title, description, due date, status, and priority )
+- Click save 
+
+Edit Task
+
+- Click edit icon 
+- Modify task details that you want to change ( eg: title, description, due date, status, and priority )
+- Click save 
+
+Delete Task 
+
+- Click delete icon
+- Enter ok on show confirmation alert 
+
+Change Task Status 
+
+- Change status in task edit ( To Do, In Progress, Done )
+- Can change also task status by Drag and Drop  ( To Do, In Progress, Done )
+
+Overview Dashboard 
+
+- Can see overview tasks like total count, complete tasks, and priority tasks
+
+Toggle Theme Mode 
+
+- Can change dark and light mode by clicking theme button at header 
