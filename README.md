@@ -1,50 +1,95 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Project Title
 
-Currently, two official plugins are available:
+Kanban Board : Task Management System 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A modern task management system built with shadcn/ui, TypeScript, Tailwind CSS, and Zustand. This project includes features like drag-and-drop task organization, a dashboard overview, dark/light mode, and mobile responsive.
+## Demo Link
 
-## Expanding the ESLint configuration
+https://kanban.aungpaingsoe.site
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+
+## Screenshots
+
+![App Screenshot](https://github.com/aungpaingsoe-dev/kanban-board/blob/main/public/Responsive%20Frame.png?raw=true)
+
+
+## Features
+
+- Task Management with Drag-and-Drop
+- Dashboard Overview
+- Dark Mode / Light Mode
+- Mobile Responsive
+
+
+## Tech Stack
+
+**Client:** TypeScrpt, React, TailwindCSS, Zustand
+
+
+
+
+
+## Folder Structure
+
+```bash
+/kanban-board
+│── public/           # Static assets
+│── src/              # Source code
+│   ├── components/   # Reusable UI components
+│   ├── pages/        # Page components     
+│   ├── providers/    # Context providers
+│   ├── lib/          # Utility functions
+│   ├── styles/       # Global stylesinteractions
+│   ├── routes/       # React Routers
+│   ├── stores/       # Stage Management
+│   ├── types/        # Global types
+│   ├── App.tsx       # Main application component
+│   ├── main.tsx      # Entry point
+│── .gitignore        # Files to ignore in Git
+│── package.json      # Project dependencies and scripts
+│── README.md         # Project documentation
+
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Run Locally
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Clone the project
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+  git clone https://github.com/aungpaingsoe-dev/kanban-board.git
 ```
+
+Go to the project directory
+
+```bash
+  cd kanban-board
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+##Usage Guide
+
+1️⃣ Adding a Task
+* Click on the "Add Task" button
+* Enter the task details (title, description, priority, etc.)
+* Click Save
+2️⃣ Managing Tasks
+* Drag and drop tasks between different columns (To Do, In Progress, Done)
+* Click on a task to edit or delete it
+3️⃣ Switching Dark/Light Mode
+* Toggle the theme switch button in the top-right corner
+4️⃣ Mobile View
+* The app is **fully responsive
