@@ -7,7 +7,7 @@ import { ThemeProvider } from "./providers/theme-provider";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider>
+    <ThemeProvider defaultTheme="light">
       <RouterProvider router={router} />
     </ThemeProvider>
   </StrictMode>
