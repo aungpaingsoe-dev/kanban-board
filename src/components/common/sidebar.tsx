@@ -6,7 +6,7 @@ const SideBar: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div className="w-[240px] h-screen border-e shadow-sm py-4 px-2 fixed top-0 start-0 bg-white">
+    <div className="md:w-[240px] h-screen border-e shadow-sm py-4 px-2 fixed top-0 start-0 bg-white hidden md:block">
       <div className="text-xl font-medium px-2">Kanban Board</div>
       <div className="mt-7">
         <div className=" opacity-70 px-2 text-sm">General</div>

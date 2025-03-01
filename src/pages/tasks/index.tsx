@@ -9,6 +9,7 @@ import Empty from "./_components/empty";
 import DeleteButton from "./_components/delete-button";
 import EditButton from "./_components/edit-button";
 import { Task as ITask } from "@/types";
+import { useLocation } from "react-router";
 
 // Draggable Task Component
 const TaskItem: React.FC<ITask> = ({
@@ -123,6 +124,7 @@ const Column = ({ status, tasks, onDrop }: any) => {
 
 const Tasks = () => {
   const { tasks, updateTask } = useTaskStore();
+  const location = useLocation();
 
   const handleDrop = (id: number, newStatus: string) => {
     let task = tasks.find((task) => task.id === id);
@@ -135,7 +137,18 @@ const Tasks = () => {
   return (
     <>
       <DndProvider backend={HTML5Backend}>
-        <div className="grid grid-cols-3 gap-3">
+        <div className="md:hidden">
+          {location.hash === "#todo" && (
+            <Column status="Todo" tasks={tasks} onDrop={handleDrop} />
+          )}
+          {location.hash === "#in-progress" && (
+            <Column status="In Progress" tasks={tasks} onDrop={handleDrop} />
+          )}
+          {location.hash === "#done" && (
+            <Column status="Done" tasks={tasks} onDrop={handleDrop} />
+          )}
+        </div>
+        <div className=" hidden md:grid md:grid-cols-3 gap-3">
           <Column status="Todo" tasks={tasks} onDrop={handleDrop} />
           <Column status="In Progress" tasks={tasks} onDrop={handleDrop} />
           <Column status="Done" tasks={tasks} onDrop={handleDrop} />
