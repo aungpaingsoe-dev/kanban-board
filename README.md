@@ -24,7 +24,7 @@ https://kanban.aungpaingsoe.site
 
 ## Tech Stack
 
-**Client:** TypeScrpt, React, TailwindCSS, Zustand
+**Client:** TypeScript, React, TailwindCSS, Zustand
 
 
 
