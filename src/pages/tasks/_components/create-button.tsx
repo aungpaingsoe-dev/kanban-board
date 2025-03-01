@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { CircleCheck, Circle, Clock, PlusCircle } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -79,6 +79,16 @@ const CreateButton: React.FC<{ status: "Todo" | "In Progress" | "Done" }> = ({
         </div>
       );
   };
+
+  useEffect(() => {
+    reset({
+      text: "",
+      description: "",
+      priority: "Low",
+      due_date: new Date().toISOString().split("T")[0],
+      status: status,
+    });
+  }, [open, reset, status]);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
