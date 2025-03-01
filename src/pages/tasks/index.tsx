@@ -11,7 +11,7 @@ import EditButton from "./_components/edit-button";
 import { Task as ITask } from "@/types";
 
 // Draggable Task Component
-const Task: React.FC<ITask> = ({
+const TaskItem: React.FC<ITask> = ({
   id,
   text,
   description,
@@ -35,7 +35,9 @@ const Task: React.FC<ITask> = ({
       className="border p-3 rounded-lg shadow-sm cursor-grab bg-white transition-all flex flex-col gap-3"
     >
       <div className="font-medium flex justify-between items-center">
-        <div>{text}</div>
+        <div className=" text ">
+          {text.length > 40 ? text.slice(0, 40) + "..." : text}
+        </div>
         <div className="flex items-center">
           <EditButton
             id={id}
@@ -48,16 +50,18 @@ const Task: React.FC<ITask> = ({
           <DeleteButton id={id} />
         </div>
       </div>
-      {priority === "Low" && <Badge variant="outline">Low Priority</Badge>}
-      {priority === "Medium" && (
-        <Badge variant="default">Medium Priority</Badge>
-      )}
-      {priority === "High" && (
-        <Badge variant="destructive">High Priority</Badge>
-      )}
-      <div className="flex items-center gap-1 text-xs">
-        <Calendar size={16} />
-        Due : {due_date}
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-1 text-xs">
+          <Calendar size={16} />
+          Due : {due_date}
+        </div>
+        {priority === "Low" && <Badge variant="outline">Low Priority</Badge>}
+        {priority === "Medium" && (
+          <Badge variant="default">Medium Priority</Badge>
+        )}
+        {priority === "High" && (
+          <Badge variant="destructive">High Priority</Badge>
+        )}
       </div>
     </div>
   );
@@ -74,11 +78,12 @@ const Column = ({ status, tasks, onDrop }: any) => {
   });
 
   const isActive = canDrop && isOver;
- 
+  console.log(isActive);
+
   return (
     <div ref={drop}>
       <div className="text-sm flex justify-between up items-center gap-1 mb-5 font-bold">
-        <div className="flex gap-1.5 uppercase">
+        <div className="flex gap-1.5 items-center uppercase">
           {status === "Todo" && <Circle size={20} />}
           {status === "In Progress" && (
             <Clock size={20} className="text-yellow-500" />
@@ -87,17 +92,20 @@ const Column = ({ status, tasks, onDrop }: any) => {
             <CircleCheck size={20} className="text-green-500" />
           )}
           {status}
+          <Badge variant="outline">
+            {tasks.filter((task: any) => task.status === status)?.length}
+          </Badge>
         </div>
         <CreateButton status={status} />
       </div>
-      <div className="flex flex-col gap-2 h-[calc(100vh-150px)]">
+      <div className="flex flex-col gap-2 h-[calc(100vh-200px)]">
         {tasks.filter((task: any) => task.status === status).length === 0 ? (
           <Empty />
         ) : (
           tasks
             .filter((task: any) => task.status === status)
             .map((task: any) => (
-              <Task
+              <TaskItem
                 key={task.id}
                 id={task.id}
                 text={task.text}

@@ -154,7 +154,7 @@ const EditButton: React.FC<ITask> = ({
               )}
             />
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <Label htmlFor="priority">
                 Priority <span className="text-red-500">*</span>
@@ -205,6 +205,36 @@ const EditButton: React.FC<ITask> = ({
               {errors.due_date && (
                 <p className="text-red-500 text-sm mt-1">
                   {errors.due_date.message}
+                </p>
+              )}
+            </div>
+            <div>
+              <Label htmlFor="status">
+                Status <span className="text-red-500">*</span>
+              </Label>
+              <Controller
+                name="status"
+                control={control}
+                defaultValue={status}
+                rules={{ required: "Status is required" }}
+                render={({ field }) => (
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger id="status" className="mt-2">
+                      <SelectValue placeholder="Select status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="Todo">Todo</SelectItem>
+                        <SelectItem value="In Progress">In Progress</SelectItem>
+                        <SelectItem value="Done">Done</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                )}
+              />
+              {errors.status && (
+                <p className="text-red-500 text-sm mt-1">
+                  {errors.status.message}
                 </p>
               )}
             </div>
