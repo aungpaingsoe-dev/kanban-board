@@ -80,7 +80,7 @@ Start the server
   npm run dev
 ```
 
-## Usage Guid
+## Usage Guide
 
 Create New Tasks
 
