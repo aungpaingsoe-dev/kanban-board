@@ -31,7 +31,7 @@ const TaskItem: React.FC<ITask> = ({
   const isOverDue = () => {
     const dueDate = new Date(due_date);
     const today = new Date();
-    const isOverdue = dueDate > today;
+    const isOverdue = dueDate < today;
     return isOverdue;
   };
 
