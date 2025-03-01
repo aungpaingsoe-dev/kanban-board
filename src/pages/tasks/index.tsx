@@ -29,12 +29,10 @@ const TaskItem: React.FC<ITask> = ({
     }),
   });
 
-  console.log(isDragging);
-
   return (
     <div
       ref={drag}
-      className={`border p-3 rounded-lg shadow-sm cursor-grab bg-white transition-all flex flex-col gap-3 ${
+      className={`border p-3 rounded-lg shadow-sm cursor-grab bg-white dark:bg-gray-900 transition-all flex flex-col gap-3 ${
         isDragging && "hidden"
       }`}
     >
